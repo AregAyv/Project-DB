@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, Numeric, Date
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -13,5 +14,7 @@ class Car(Base):
     Brand = Column("Brand", String)
     Number = Column("Number", Integer)
     Year_of_issue = Column("Year_of_issue", Integer)
+
+    orders = relationship('Order', back_populates='car')
 
 
