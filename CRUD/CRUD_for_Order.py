@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException, Depends
 
 from models.order import Order
 from sqlalchemy.orm import Session
+from sqlalchemy import update, delete
 
 
 def create_order(db: Session, order: Order):
@@ -21,27 +22,32 @@ def get_orders(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Order).offset(skip).limit(limit).all()
 
 
-def update_orders(db: Session, order_id: int, price: float, type_of_work: str, date_of_issue: Date,
-                  planned_end_date: Date, real_end_date: Date, car_id: int, auto_mechanic_id: int):
-    order = db.query(Order).filter(Order.Id == order_id).first()
-    if order:
-        order.Price = price
-        order.Type_of_work = type_of_work
-        order.Date_of_issue = date_of_issue
-        order.Planned_end_date = planned_end_date
-        order.Real_end_date = real_end_date
-        order.car_id = car_id
-        order.auto_mechanic_id = auto_mechanic_id
-        db.commit()
-        db.refresh(order)
-        return order
-    return None
+def update_order(db: Session, order_id: int, new_data: Order):
+    stmt = (
+        update(Order).
+        where(Order.Id == order_id).
+        values(
+            Price=new_data.Price,
+            Type_of_work=new_data.Type_of_work,
+            Date_of_issue=new_data.Date_of_issue,
+            Planned_end_date=new_data.Planned_end_date,
+            Real_end_date=new_data.Real_end_date,
+            car_id=new_data.car_id,
+            auto_mechanic_id=new_data.auto_mechanic_id
+        )
+    )
+
+    db.execute(stmt)
+    db.commit()
+
+    updated_order = db.query(Order).filter(Order.Id == order_id).first()
+    return updated_order
 
 
 def delete_order(db: Session, order_id: int):
-    order = db.query(Order).filter(Order.Id == order_id).first()
-    if order:
-        db.delete(order)
-        db.commit()
-        return order
-    return None
+    stmt = delete(Order).where(Order.Id == order_id)
+
+    deleted_order = db.execute(stmt)
+    db.commit()
+
+    return deleted_order
