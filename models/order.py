@@ -1,8 +1,7 @@
 import datetime
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, Numeric, DateTime
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import ForeignKey, Column, String, Integer, Numeric, DateTime
+# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column
 from connect import Base
 
 
@@ -21,5 +20,3 @@ class Order(Base):
 
     # car: Mapped["Car"] = relationship(back_populates="orders")
     # auto_mechanic: Mapped["AutoMechanic"] = relationship(back_populates="orders")
-
-

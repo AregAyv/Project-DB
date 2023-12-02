@@ -1,9 +1,8 @@
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, Numeric, DateTime
+from sqlalchemy import String, Integer, DateTime
 import datetime
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from typing import List
+# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped, mapped_column
+# from typing import List
 from connect import Base
 
 

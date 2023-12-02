@@ -5,4 +5,3 @@ from connect import engine
 from connect import Base
 
 Base.metadata.create_all(bind=engine)
-
