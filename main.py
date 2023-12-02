@@ -1,11 +1,54 @@
 from typing import Union
-from fastapi import FastAPI
+# from fastapi import FastAPI
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
-engine = create_engine(f"sqlite:///Auto_repair_shop.db", echo=False)
+engine = create_engine(f"sqlite:///Auto_repair_shop.db", echo=True)
+
+with engine.connect() as connection:
+    result = connection.execute(text('select "Hello"'))
+
+print(result.all())
+
+
+# app = FastAPI()
+
+
+# Dependency to get the database session
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
+
+
+# @app.post("/orders/", response_model=Order)
+# def create_order_api(order: Order, db: Session = Depends(get_db)):
+#     return create_order(db, order)
+#
+#
+# @app.get("/orders/{order_id}", response_model=Order)
+# def read_order(order_id: int, db: Session = Depends(get_db)):
+#     return get_order(db, order_id)
+#
+#
+# @app.put("/orders/{order_id}", response_model=Order)
+# def update_order_api(order_id: int, new_data: Order, db: Session = Depends(get_db)):
+#     updated_order = update_order(db, order_id, new_data)
+#     if updated_order is None:
+#         raise HTTPException(status_code=404, detail="Order not found")
+#     return updated_order
+#
+#
+# @app.delete("/orders/{order_id}", response_model=Order)
+# def delete_order_api(order_id: int, db: Session = Depends(get_db)):
+#     deleted_order = delete_order(db, order_id)
+#     if deleted_order is None:
+#         raise HTTPException(status_code=404, detail="Order not found")
+#     return deleted_order
 
 # Base = declarative_base()
 #

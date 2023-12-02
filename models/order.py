@@ -1,6 +1,10 @@
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, Numeric, Date
+import datetime
+from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR, Numeric, DateTime
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from models.car import Car
+from models.auto_mechanic import AutoMechanic
 
 Base = declarative_base()
 
@@ -8,17 +12,15 @@ Base = declarative_base()
 class Order(Base):
     __tablename__ = "Order"
 
-    Id = Column("Id", Integer, primary_key=True)
-    Price = Column("Price", Numeric(10, 2))
-    Type_of_work = Column("Type_of_work", String)
-    Date_of_issue = Column("Date_of_issue", Date)
-    Planned_end_date = Column("Planned_end_date", Date)
-    Real_end_date = Column("Real_end_date", Date)
+    Id: Mapped[int] = mapped_column(primary_key=True)
+    Price: Mapped[Numeric[10, 2]] = mapped_column(nullable=False)
+    Type_of_work: Mapped[str] = mapped_column(nullable=False)
+    Date_of_issue: Mapped[datetime.datetime] = Column(nullable=False)
+    Planned_end_date: Mapped[datetime] = Column(nullable=False)
+    Real_end_date: Mapped[datetime] = Column(nullable=False)
 
-    car_id = Column(Integer, ForeignKey('Car.Id'))
-    auto_mechanic_id = Column(Integer, ForeignKey('Auto_Mechanic.Id'))
+    car_id: Mapped[int] = mapped_column(ForeignKey("Car.Id"))
+    auto_mechanic_id: Mapped[int] = mapped_column(ForeignKey("AutoMechanic.Id"))
 
-    car = relationship('Car', back_populates='orders')
-    auto_mechanic = relationship('AutoMechanic', back_populates='orders')
-
-
+    car: Mapped["Car"] = relationship(back_populates="orders")
+    auto_mechanic: Mapped["AutoMechanic"] = relationship(back_populates="orders")
