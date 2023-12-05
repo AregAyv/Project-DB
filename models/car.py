@@ -1,7 +1,7 @@
 from sqlalchemy import String, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 # from typing import List
-from connect import Base
+from Base import Base
 
 
 class Car(Base):

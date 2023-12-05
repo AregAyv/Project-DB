@@ -2,11 +2,8 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = os.getenv("FASTAPI_DB_URL")
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
-)
+engine = create_engine(f"sqlite:///Auto_repair_shop.db", echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

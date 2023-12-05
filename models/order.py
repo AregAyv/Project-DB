@@ -2,7 +2,7 @@ import datetime
 from sqlalchemy import ForeignKey, Column, String, Integer, DateTime
 # from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Mapped, mapped_column
-from connect import Base
+from Base import Base
 
 
 class Order(Base):

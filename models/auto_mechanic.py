@@ -3,7 +3,7 @@ import datetime
 # from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Mapped, mapped_column
 # from typing import List
-from connect import Base
+from Base import Base
 
 
 class AutoMechanic(Base):

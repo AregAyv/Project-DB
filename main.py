@@ -1,6 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
-from models.database import engine
+from database import engine
 # from models.order import Order
 
 from routers.order_router import router as order_router
