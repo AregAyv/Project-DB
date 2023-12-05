@@ -19,7 +19,7 @@ class Order(OrderBase):
     Id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class CarBase(BaseModel):
@@ -37,7 +37,7 @@ class Car(CarBase):
     Id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class AutoMechanicBase(BaseModel):
@@ -56,4 +56,4 @@ class AutoMechanic(AutoMechanicBase):
     Id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -9,7 +9,7 @@ class Order(Base):
     __tablename__ = "Order"
 
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    Price: Mapped[int] = mapped_column(int, nullable=False)
+    Price: Mapped[int] = mapped_column(Integer, nullable=False)
     Type_of_work: Mapped[str] = mapped_column(String, nullable=False)
     Date_of_issue: Mapped[datetime.date] = Column(DateTime, nullable=False)
     Planned_end_date: Mapped[datetime.date] = Column(DateTime, nullable=False)
