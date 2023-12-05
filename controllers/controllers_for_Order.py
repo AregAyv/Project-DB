@@ -7,22 +7,22 @@ from sqlalchemy.orm import Session
 from sqlalchemy import update, delete
 
 
-def create_order(db: Session, order: Order):
+def create(db: Session, order: Order):
     db.add(order)
     db.commit()
     db.refresh(order)
     return order
 
 
-def get_order(db: Session, order_id: int):
+def get_one(db: Session, order_id: int):
     return db.query(Order).filter(Order.Id == order_id).first()
 
 
-def get_orders(db: Session, skip: int = 0, limit: int = 10):
+def get_all(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Order).offset(skip).limit(limit).all()
 
 
-def update_order(db: Session, order_id: int, new_data: Order):
+def update_(db: Session, order_id: int, new_data: Order):
     stmt = (
         update(Order).
         where(Order.Id == order_id).
@@ -44,7 +44,7 @@ def update_order(db: Session, order_id: int, new_data: Order):
     return updated_order
 
 
-def delete_order(db: Session, order_id: int):
+def delete_(db: Session, order_id: int):
     stmt = delete(Order).where(Order.Id == order_id)
 
     deleted_order = db.execute(stmt)

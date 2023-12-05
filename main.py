@@ -1,20 +1,16 @@
 from typing import Union
-# from fastapi import FastAPI
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import text
+from fastapi import FastAPI
+from models.database import engine
+# from models.order import Order
 
-engine = create_engine(f"sqlite:///Auto_repair_shop.db", echo=True)
+from routers.order_router import router as order_router
 
-with engine.connect() as connection:
-    result = connection.execute(text('select "Hello"'))
+app = FastAPI()
 
-print(result.all())
-
-
-# app = FastAPI()
-
+app.include_router(
+    router=order_router,
+    prefix='/orders',
+)
 
 # Dependency to get the database session
 # def get_db():
