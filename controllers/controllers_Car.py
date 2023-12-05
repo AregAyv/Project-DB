@@ -5,24 +5,25 @@ from fastapi import FastAPI, HTTPException, Depends
 from models.car import Car
 from sqlalchemy.orm import Session
 from sqlalchemy import update, delete
+from schemas import CarCreate
 
 
-def create_car(db: Session, car: Car):
+def create_(db: Session, car: CarCreate):
     db.add(car)
     db.commit()
     db.refresh(car)
     return car
 
 
-def get_car(db: Session, car_id: int):
+def get_one(db: Session, car_id: int):
     return db.query(Car).filter(Car.Id == car_id).first()
 
 
-def get_all_cars(db: Session, skip: int = 0, limit: int = 10):
+def get_all(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Car).offset(skip).limit(limit).all()
 
 
-def update_car(db: Session, car_id: int, new_data: Car):
+def update_(db: Session, car_id: int, new_data: CarCreate):
     stmt = (
         update(Car).
         where(Car.Id == car_id).
@@ -41,7 +42,7 @@ def update_car(db: Session, car_id: int, new_data: Car):
     return updated_car
 
 
-def delete_car(db: Session, car_id: int):
+def delete_(db: Session, car_id: int):
     stmt = delete(Car).where(Car.Id == car_id)
 
     deleted_car = db.execute(stmt)

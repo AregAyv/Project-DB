@@ -5,9 +5,10 @@ from fastapi import FastAPI, HTTPException, Depends
 from models.order import Order
 from sqlalchemy.orm import Session
 from sqlalchemy import update, delete
+from schemas import OrderCreate
 
 
-def create(db: Session, order: Order):
+def create_(db: Session, order: OrderCreate):
     db.add(order)
     db.commit()
     db.refresh(order)
@@ -22,7 +23,7 @@ def get_all(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Order).offset(skip).limit(limit).all()
 
 
-def update_(db: Session, order_id: int, new_data: Order):
+def update_(db: Session, order_id: int, new_data: OrderCreate):
     stmt = (
         update(Order).
         where(Order.Id == order_id).
