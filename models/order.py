@@ -11,9 +11,9 @@ class Order(Base):
     Id: Mapped[int] = mapped_column(Integer, primary_key=True)
     Price: Mapped[int] = mapped_column(Integer, nullable=False)
     Type_of_work: Mapped[str] = mapped_column(String, nullable=False)
-    Date_of_issue: Mapped[datetime.date] = Column(DateTime, nullable=False)
-    Planned_end_date: Mapped[datetime.date] = Column(DateTime, nullable=False)
-    Real_end_date: Mapped[datetime.date] = Column(DateTime, nullable=False)
+    Date_of_issue: Mapped[datetime.date] = mapped_column(DateTime, nullable=False)
+    Planned_end_date: Mapped[datetime.date] = mapped_column(DateTime, nullable=False)
+    Real_end_date: Mapped[datetime.date] = mapped_column(DateTime, nullable=False)
 
     car_id: Mapped[int] = mapped_column(ForeignKey("Car.Id"))
     auto_mechanic_id: Mapped[int] = mapped_column(ForeignKey("AutoMechanic.Id"))

@@ -2,10 +2,13 @@ from typing import Union
 from fastapi import FastAPI
 from database import engine
 # from models.order import Order
-
+from Base import Base
 from routers.order_router import router as order_router
 from routers.car_router import router as car_router
 from routers.auto_mechanic_router import router as auto_mechanic_router
+
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
