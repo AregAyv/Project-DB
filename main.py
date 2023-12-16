@@ -1,7 +1,5 @@
-from typing import Union
 from fastapi import FastAPI
 from database import engine
-# from models.order import Order
 from Base import Base
 from routers.order_router import router as order_router
 from routers.car_router import router as car_router
