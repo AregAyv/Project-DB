@@ -3,7 +3,7 @@ from sqlalchemy import func, select
 from models.order import Order
 from models.car import Car
 from models.auto_mechanic import AutoMechanic
-from generator import generate_orders, generate_cars, generate_auto_mechanic
+from generator import generate_orders_gen, generate_cars_gen, generate_auto_mechanic_gen
 
 
 def get_join_of_cars_and_orders(db: Session, per_page: int, page: int) -> list:
@@ -51,8 +51,6 @@ def get_orders_count_for_cars(db: Session, per_page: int, page: int) -> list:
 
 
 def get_cars_with_year_of_issue(db: Session, date_of_issue: int, per_page: int, page: int) -> list:
-    # You may adjust or remove this condition based on your actual data model
-    # For example, if there's no Year_of_issue in Order, you might use another condition.
     subquery = (
         db.query(Order.car_id)
         .filter(Order.Date_of_issue >= date_of_issue)  # Replace with a relevant condition
@@ -90,14 +88,14 @@ def update_brand(db: Session, new_brand: str) -> None:
 
 
 def generate_cars_by_quantity(db: Session, quantity: int) -> str:
-    data = generate_cars(quantity)
+    data = generate_cars_gen(quantity)
     db.add_all(data)
     db.commit()
     return "Create cars was successful"
 
 
 def generate_orders_by_quantity(db: Session, quantity: int) -> str:
-    data = generate_orders(quantity)
+    data = generate_orders_gen(quantity)
     db.add_all(data)
     db.commit()
     return "Create orders was successful"

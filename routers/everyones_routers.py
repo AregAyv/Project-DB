@@ -46,8 +46,10 @@ async def generate_cars(quantity: int, db: Session = Depends(SessionLocal)):
 
 
 @router.post('/orders/generate', response_model=dict)
-async def generate_orders(quantity: int, car_id_range: tuple, db: Session = Depends(SessionLocal)):
-    result = generate_orders_by_quantity(db, quantity, car_id_range)
+async def generate_orders(quantity: int, db: Session = Depends(SessionLocal)):
+    result = generate_orders_by_quantity(db, quantity)
+    db.add_all(result)
+    db.commit()
     return {'message': result}
 
 

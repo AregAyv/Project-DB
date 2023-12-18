@@ -38,13 +38,13 @@ def generate_auto_mechanic_():
     )
 
 
-def generate_orders(quantity: int):
+def generate_orders_gen(quantity: int):
     return [generate_order_() for i in range(quantity)]
 
 
-def generate_cars(quantity: int):
+def generate_cars_gen(quantity: int):
     return [generate_car_() for i in range(quantity)]
 
 
-def generate_auto_mechanic(quantity: int):
+def generate_auto_mechanic_gen(quantity: int):
     return [generate_auto_mechanic_() for i in range(quantity)]

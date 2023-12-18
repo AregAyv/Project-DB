@@ -4,7 +4,7 @@ from Base import Base
 from routers.order_router import router as order_router
 from routers.car_router import router as car_router
 from routers.auto_mechanic_router import router as auto_mechanic_router
-
+from routers.everyones_routers import router as everyones_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -23,6 +23,11 @@ app.include_router(
 app.include_router(
     router=auto_mechanic_router,
     prefix='/auto_mechanics',
+)
+
+app.include_router(
+    router=everyones_router,
+    prefix='/everyones_router',
 )
 
 
