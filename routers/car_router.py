@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from typing import List, Annotated
+
 
 from models.car import Car
 from controllers.controllers_Car import get_one, get_all, update_, delete_, create_
