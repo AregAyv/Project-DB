@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import SessionLocal  # Replace with your actual database setup
+from database import SessionLocal
 from controllers.controllers_for_everyone import (
     get_join_of_cars_and_orders,
     get_orders_count_for_cars,
