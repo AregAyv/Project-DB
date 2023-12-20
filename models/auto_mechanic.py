@@ -14,4 +14,4 @@ class AutoMechanic(Base):
     Planned_end_date: Mapped[datetime.datetime] = mapped_column(Date, nullable=False)
     Personnel_Number: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    # orders: Mapped[List["Order"]] = relationship(back_populates='auto_mechanic')
+

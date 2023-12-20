@@ -13,4 +13,4 @@ class Car(Base):
     Number: Mapped[int] = mapped_column(Integer, nullable=False)
     Year_of_issue: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    # orders: Mapped[List["Order"]] = relationship(back_populates="car")
+

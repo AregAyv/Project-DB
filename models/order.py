@@ -18,5 +18,3 @@ class Order(Base):
     car_id: Mapped[int] = mapped_column(ForeignKey("Car.Id"))
     auto_mechanic_id: Mapped[int] = mapped_column(ForeignKey("AutoMechanic.Id"))
 
-    # car: Mapped["Car"] = relationship(back_populates="orders")
-    # auto_mechanic: Mapped["AutoMechanic"] = relationship(back_populates="orders")
