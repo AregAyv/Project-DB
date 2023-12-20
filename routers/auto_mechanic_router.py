@@ -36,3 +36,10 @@ def update_auto_mechanic(mechanic_id: int, new_data: schemas.AutoMechanicCreate,
 @router.delete("/auto_mechanics/{mechanic_id}")
 def delete_auto_mechanic(mechanic_id: int, db: Session = Depends(get_db)):
     return delete_(db, mechanic_id)
+
+
+@router.get("/auto_mechanic/", response_model=List[schemas.AutoMechanic])
+def get_auto_mechanics_pagination(page: int = 0, per_page: int = 10, sort_by: str = "id", db: Session = Depends(get_db)):
+    auto_mechanics = db.query(AutoMechanic).order_by(getattr(AutoMechanic, sort_by)).offset(page * per_page).limit(
+        per_page).all()
+    return auto_mechanics

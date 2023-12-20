@@ -36,3 +36,9 @@ def update_order(order_id: int, new_data: schemas.OrderCreate, db: Session = Dep
 @router.delete("/orders/{order_id")
 def delete_order(order_id: int, db: Session = Depends(get_db)):
     return delete_(db, order_id)
+
+
+@router.get("/order/", response_model=List[schemas.Order])
+def get_orders_pagination(page: int = 0, per_page: int = 10, db: Session = Depends(get_db)):
+    orders = db.query(Order).offset(page * per_page).limit(per_page).all()
+    return orders
