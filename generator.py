@@ -3,8 +3,9 @@ from models.car import Car
 from models.auto_mechanic import AutoMechanic
 from faker import Faker
 import random
-
+import requests
 fake = Faker()
+BASE_URL = "http://localhost:8000"
 
 
 def generate_order_():
@@ -48,3 +49,34 @@ def generate_cars_gen(quantity: int):
 
 def generate_auto_mechanic_gen(quantity: int):
     return [generate_auto_mechanic_() for i in range(quantity)]
+
+
+def populate_orders(num_orders):
+    for _ in range(num_orders):
+        order_data = generate_order_()
+        requests.post(f"{BASE_URL}/orders/", json=order_data)
+
+
+def populate_cars(num_cars):
+    for _ in range(num_cars):
+        car_data = generate_car_()
+        requests.post(f"{BASE_URL}/cars/", json=car_data)
+
+
+def populate_auto_mechanics(num_auto_mechanics):
+    for _ in range(num_auto_mechanics):
+        auto_mechanic_data = generate_auto_mechanic_()
+        requests.post(f"{BASE_URL}/auto_mechanics/", json=auto_mechanic_data)
+
+
+if __name__ == "__main__":
+    num_orders_to_create = 100
+    populate_orders(num_orders_to_create)
+
+    num_cars_to_create = 100
+    populate_cars(num_cars_to_create)
+
+    num_auto_mechanics_to_create = 100
+    populate_auto_mechanics(num_auto_mechanics_to_create)
+
+    print('/Population completed/')
